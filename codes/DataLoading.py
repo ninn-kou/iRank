@@ -2,6 +2,14 @@ import numpy as np
 import csv
 
 def loadAlaskaDataIntoNetwork(path):
+    """Alaska Multiplex Networks
+        URL:
+            <https://github.com/manlius/Alaska>
+        TAGS:
+            Multiplex,
+            Directed,
+            Weighted
+    """
     filename = open(path, 'r')
     file = csv.reader(filename)
 
@@ -36,11 +44,22 @@ def loadAlaskaDataIntoNetwork(path):
     filename = open(path, 'r')
     file = csv.reader(filename)
     for row in file:
+        # Undirected Graph so ""
         network[int(row[1]) - 1][int(row[3]) - 1][int(row[0]) - 1][int(row[2]) - 1] = float(row[4])
 
     return network, g, nodesLayers
 
 def loadEUAirTransportDataIntoNetwork(path):
+    """EU-Air Transportation Multiplex Network
+        URL:
+            <http://complex.unizar.es/~atnmultiplex/>
+            <https://manliodedomenico.com/data.php> (Reproducibility)
+        TAGS:
+            Transport,
+            Multiplex,
+            Undirected,
+            Weighted
+    """
     filename = open(path, 'r')
     file = csv.reader(filename)
 
@@ -68,5 +87,6 @@ def loadEUAirTransportDataIntoNetwork(path):
     for row in file:
         currLayer = int(row[0]) - 1
         network[currLayer][currLayer][int(row[1]) - 1][int(row[2]) - 1] = float(row[3])
+        network[currLayer][currLayer][int(row[2]) - 1][int(row[1]) - 1] = float(row[3])
 
     return network, g, nodesLayers
