@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def inverseSR(diagonal):
     """
     Inverse Square Root for Symmetrically normalized Laplacian matrix, skip all "0" in ndarray.
@@ -7,6 +8,7 @@ def inverseSR(diagonal):
     for val in range(len(diagonal)):
         diagonal[val] = diagonal[val] ** (-0.5) if diagonal[val] else 0
     return diagonal
+
 
 def stage2(network, H, lam, sig, xbar):
     """
@@ -66,7 +68,11 @@ def stage2(network, H, lam, sig, xbar):
     S_cross = np.ones((g, g), dtype=object)
     for alpha in range(g):
         for beta in range(g):
-            S_cross[alpha][beta] = D_cross_out[alpha][beta] @ network[alpha][beta] @ D_cross_in[alpha][beta]
+            S_cross[alpha][beta] = (
+                D_cross_out[alpha][beta]
+                @ network[alpha][beta]
+                @ D_cross_in[alpha][beta]
+            )
 
     X = np.ones(g, dtype=object)
     for layer in range(g):
@@ -77,6 +83,10 @@ def stage2(network, H, lam, sig, xbar):
         temp_cross = 0
         for beta in range(g):
             temp_cross += G[alpha][beta] * (S_cross[alpha][beta] @ X[beta])
-        X[alpha] = lam * (S_within[alpha] @ X[alpha]) + sig * temp_cross + (1 - lam - sig) * xbar[alpha]
+        X[alpha] = (
+            lam * (S_within[alpha] @ X[alpha])
+            + sig * temp_cross
+            + (1 - lam - sig) * xbar[alpha]
+        )
 
     return X
