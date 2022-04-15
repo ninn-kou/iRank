@@ -69,8 +69,11 @@ def stage1(Network, Size, a, s, gamma, delta=0.85):
         X /= np.sum(X)
 
         Z = np.zeros(g, dtype=float)
+        # Handle with ZeroDivisionError for (0 ** -1).
+        X_not_zero = np.copy(X)
+        X_not_zero[X_not_zero == 0] = 1
         for layer in range(g):
-            Z[layer] = (W[layer] ** a) * (np.sum(B[layer] * (X ** (s * gamma))) ** s)
+            Z[layer] = (W[layer] ** a) * (np.sum(B[layer] * (X_not_zero ** (s * gamma))) ** s)
         Z /= np.sum(Z)
 
         # Stopping condition.
