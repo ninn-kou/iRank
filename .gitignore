@@ -231,5 +231,7 @@ Thumbs.db
 # profiling data
 .prof
 
+# Subdatasets for LOOCV
+LOOCV_*/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,c,python
