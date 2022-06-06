@@ -4,7 +4,7 @@ import numpy as np
 def stage1(Network, Size, a, s, gamma, delta=0.85):
     """
     Network:
-        (g * n * n) ndarray, g layers adjacency matrices.
+        (g * n * n) ndarray, g layers supra adjacency matrices.
     Size:
         (g) ndarray, number of nodes in each layer.
     a: the influence of a layer is
@@ -32,7 +32,7 @@ def stage1(Network, Size, a, s, gamma, delta=0.85):
 
     B = np.zeros((g, n), dtype=float)
     for layer in range(g):
-        B[layer] = np.sum(A[layer], axis=0) / W[layer]
+        B[layer] = np.sum(A[layer], axis=0) / (W[layer] + 1)
 
     # Centrality of layer initialized as 0.
     # Z = np.random.uniform(0, 1, g)
@@ -64,7 +64,7 @@ def stage1(Network, Size, a, s, gamma, delta=0.85):
         X_constant = X
         X = np.zeros(n, dtype=float)
         for layer in range(g):
-            X += B[layer] * X_constant / np.sum(B[layer])
+            X += B[layer] * X_constant / (np.sum(B[layer]) + 1)
         X += V * beta
         X /= np.sum(X)
 
@@ -73,7 +73,9 @@ def stage1(Network, Size, a, s, gamma, delta=0.85):
         X_not_zero = np.copy(X)
         X_not_zero[X_not_zero == 0] = 1
         for layer in range(g):
-            Z[layer] = (W[layer] ** a) * (np.sum(B[layer] * (X_not_zero ** (s * gamma))) ** s)
+            Z[layer] = (W[layer] ** a) * (
+                np.sum(B[layer] * (X_not_zero ** (s * gamma))) ** s
+            )
         Z /= np.sum(Z)
 
         # Stopping condition.
