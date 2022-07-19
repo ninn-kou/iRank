@@ -20,7 +20,7 @@ Alaska = stage2(network1, nodesLayers1, lam1, sig1, xbar1)
 
 ################################################################################
 
-path2 = 'datasets/EUAir/EUAirTransportation_multiplex.csv'
+path2 = 'datasets/EUAir/EUAir_Transportation_multiplex.csv'
 abs_path2 = join(script_dir, path2)
 network2, g2, nodesLayers2 = loadEUAirTransportDataIntoNetwork(abs_path2)
 
