@@ -43,21 +43,6 @@ $$
 
 ## DIR
 
-- `AlgoStageOne.py`
-  - `def stage1(Network, Size, a, s, gamma, delta=0.85)`
-- `AlgoStageTwo.py`
-  - `def inverseSR(diagonal)`
-  - `def stage2(network, H, lam, sig, xbar)`
-- `DataLoading.py`
-  - `def loadAlaskaDataIntoNetwork(path)`
-  - `def loadEUAirTransportDataIntoNetwork(path)`
-- `DataPreprocessing.py` `SCRIPT`
-- `DataSplitLOOCV.py` `SCRIPT`
-- `ValiStageOne.py`
-  - `def s1_betweenness_centrality(Network, Size)`
-  - `def s1_eigenvector_centrality(Network, Size)`
-- `utils.py` `SCRIPT`
-
 ## Progressing
 
 - Codes
@@ -79,3 +64,4 @@ $$
   - [ ] LaTeX Formulas Styling
   - [ ] Experiments for Stage One
   - [ ] Experiments for Stage Two
+
